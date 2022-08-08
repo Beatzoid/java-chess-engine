@@ -12,7 +12,7 @@ import java.util.Map;
 public abstract class Tile {
     protected final int tileCoordinate;
 
-    private static final Map<Integer, EmptyTile> EMPTY_TILES = createAllPossibleEmptyTiles();
+    private static final Map<Integer, EmptyTile> EMPTY_TILES_CACHED = createAllPossibleEmptyTiles();
 
     private Tile(int tileCoordinate) {
         this.tileCoordinate = tileCoordinate;
@@ -25,7 +25,7 @@ public abstract class Tile {
      * @return A new OccupiedTile if a piece was provided, otherwise it returns an empty tile
      */
     public static Tile createTile(final int tileCoordinate, final Piece piece) {
-        return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILES.get(tileCoordinate);
+        return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILES_CACHED.get(tileCoordinate);
     }
 
     private static Map<Integer, EmptyTile> createAllPossibleEmptyTiles() {
@@ -52,7 +52,11 @@ public abstract class Tile {
      * The EmptyTile class manages all empty tiles on the board
      */
     public static final class EmptyTile extends Tile {
-        EmptyTile(final int tileCoordinate) {
+        /**
+         * Creates a new EmptyTile
+         * @param tileCoordinate The tile coordinate to create the new Tile at
+         */
+        private EmptyTile(final int tileCoordinate) {
             super(tileCoordinate);
         }
 
@@ -78,7 +82,7 @@ public abstract class Tile {
          * @param tileCoordinate The tile coordinate for the new occupied tile
          * @param pieceOnTile The piece to put on the tile
          */
-        public OccupiedTile(final int tileCoordinate, Piece pieceOnTile) {
+        private OccupiedTile(final int tileCoordinate, Piece pieceOnTile) {
             super(tileCoordinate);
             this.pieceOnTile = pieceOnTile;
         }
