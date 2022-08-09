@@ -52,10 +52,6 @@ public abstract class Tile {
      * The EmptyTile class manages all empty tiles on the board
      */
     public static final class EmptyTile extends Tile {
-        /**
-         * Creates a new EmptyTile
-         * @param tileCoordinate The tile coordinate to create the new Tile at
-         */
         private EmptyTile(final int tileCoordinate) {
             super(tileCoordinate);
         }
@@ -77,11 +73,6 @@ public abstract class Tile {
     public static final class OccupiedTile extends Tile {
         private final Piece pieceOnTile;
 
-        /**
-         * Creates a new OccupiedTile
-         * @param tileCoordinate The tile coordinate for the new occupied tile
-         * @param pieceOnTile The piece to put on the tile
-         */
         private OccupiedTile(final int tileCoordinate, Piece pieceOnTile) {
             super(tileCoordinate);
             this.pieceOnTile = pieceOnTile;

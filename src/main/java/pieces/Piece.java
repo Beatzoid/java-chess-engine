@@ -3,7 +3,7 @@ package pieces;
 import board.Board;
 import board.Move;
 
-import java.util.List;
+import java.util.Collection;
 
 public abstract class Piece {
     protected final int piecePosition;
@@ -19,10 +19,14 @@ public abstract class Piece {
         this.pieceAlliance = pieceAlliance;
     }
 
+    public Alliance getPieceAlliance() {
+        return this.pieceAlliance;
+    }
+
     /**
      * Calculate the legal moves for the piece
      * @param board The chess board
      * @return The legal moves of the piece
      */
-    public abstract List<Move> calculateLegalMoves(final Board board);
+    public abstract Collection<Move> calculateLegalMoves(final Board board);
 }
