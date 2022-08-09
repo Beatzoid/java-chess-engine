@@ -25,7 +25,7 @@ public class Knight extends Piece {
     }
 
     @Override
-    public Collection<Move> calculateLegalMoves(Board board) {
+    public Collection<Move> calculateLegalMoves(final Board board) {
         List<Move> legalMoves = new ArrayList<>();
 
         // For every move in the move offset coordinates
@@ -46,8 +46,7 @@ public class Knight extends Piece {
 
                 // If the tile is not occupied
                 if (!candidateDestinationTile.isTileOccupied()) {
-                    // The move is legal
-                    legalMoves.add(new Move());
+                    legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
                 } else {
                     // If the tile is occupied
                     // Get the piece and alliance of said piece at the destination tile
@@ -56,7 +55,7 @@ public class Knight extends Piece {
 
                     // If the knights alliance is not the same as the piece alliance, it's an enemy
                     if (this.pieceAlliance != pieceAlliance) {
-                        legalMoves.add(new Move());
+                        legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
                     }
                 }
             }
